@@ -22,11 +22,6 @@ function App() {
 
   const addToCollection = (art) => {
     const tempCol = loadCollections();
-    console.log(collections, "main collections");
-    console.log(collection, "collection in add");
-    console.log(tempCol, "temp");
-    console.log("art", art);
-    console.log("temp col");
 
     if (
       tempCol[
@@ -39,7 +34,6 @@ function App() {
         })
         .includes(true)
     ) {
-      console.log("includes it");
     } else {
       tempCol[
         tempCol.findIndex((col) => {
@@ -47,7 +41,6 @@ function App() {
         })
       ].collection.push(art);
     }
-    console.log("new main", tempCol);
     saveCollections(tempCol);
     setCollections(tempCol);
     selectCollection(loadCollectionID());
@@ -57,7 +50,6 @@ function App() {
     const collectionIndex = tempCol.findIndex((col) => {
       return col.id === +collection_id;
     });
-    console.log("finding", collectionIndex);
     const amendedCollection = tempCol[
       tempCol.findIndex((col) => {
         return col.id === +collection_id;
@@ -65,9 +57,7 @@ function App() {
     ].collection.filter((art) => {
       return art.id !== artID;
     });
-    console.log(amendedCollection, "amended collection");
     tempCol[collectionIndex].collection = amendedCollection;
-    console.log("temp col", tempCol);
     saveCollections(tempCol);
     setCollections(tempCol);
     selectCollection(loadCollectionID());
@@ -83,8 +73,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log("first try", loadCollections()[0]);
-
     if (loadCollections()[0].collection) {
       setCollections(loadCollections());
       selectCollection(loadCollectionID());
@@ -93,7 +81,6 @@ function App() {
       setCollections([{ id: 0, name: "My First Collection", collection: [] }]);
       selectCollection(0);
     }
-    console.log("uE", collections);
   }, []);
 
   return (

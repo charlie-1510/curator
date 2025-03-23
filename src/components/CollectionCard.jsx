@@ -22,7 +22,6 @@ export const CollectionCard = ({
           <button
             onClick={() => {
               selectCollection(collectionCard.id);
-              console.log("collection here", collection);
             }}
           >
             Select Collection

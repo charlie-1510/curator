@@ -46,7 +46,6 @@ export const MyCollections = ({
     const tempCollections = loadCollections().filter((collection) => {
       return collection.id !== id;
     });
-    console.log("temp", tempCollections);
     saveCollections(tempCollections);
     setCollections(tempCollections);
   };
@@ -55,7 +54,6 @@ export const MyCollections = ({
     <div className="">
       <h2>My Collections</h2>
       <section className="collection-container">
-        {console.log("before error", collections)}
         {collections.map((x, index) => {
           return (
             <CollectionCard

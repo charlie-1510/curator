@@ -13,7 +13,6 @@ export const Content = ({
   const [searchTerm, setSearchTerm] = useState();
 
   useEffect(() => {
-    console.log("in ue content");
     setLibrary([]);
     getInitialArt();
   }, [searchTerm]);

@@ -5,13 +5,10 @@ let mMArtLibFull = {
 let mMartSearchTerm;
 
 export const getCombinedArtLibrary = (searchQ) => {
-  console.log("in utils", searchQ);
-
   const aICArtLib = getAICArt(searchQ).then((data) => {
     return data;
   });
   const mMArtLib = getMMArt(searchQ).then((data) => {
-    console.log("mm art", searchQ, data);
     mMArtLibFull = data;
     mMartSearchTerm = searchQ;
     const ids = data.objectIDs.slice(0, 10);
@@ -23,7 +20,6 @@ export const getCombinedArtLibrary = (searchQ) => {
   });
 
   const mMArtLibStart = () => {
-    console.log("in mm art lib start");
     const ids = mMArtLibFull.objectIDs.slice(0, 10);
     const idsWithData = ids.map((element) => {
       return getMMArtByID(element);
@@ -36,11 +32,8 @@ export const getCombinedArtLibrary = (searchQ) => {
     aICArtLib,
     searchQ !== mMartSearchTerm ? mMArtLib : mMArtLibStart(),
   ]).then(([aICArtdata, mMArtdata]) => {
-    console.log(mMArtdata, "mmart data");
-    console.log("before format", [...aICArtdata, ...mMArtdata]);
     const aICArtLibFormat = aICArtIDFormat(aICArtdata);
     const mMArtLibFormat = mMArtIDFormat(mMArtdata);
-    console.log("formatted data", [...aICArtLibFormat, ...mMArtLibFormat]);
     return [...aICArtLibFormat, ...mMArtLibFormat];
   });
 };
@@ -75,7 +68,6 @@ export const mMArtIDFormat = (mMArtLib) => {
 
 export const getPageLib = (searchQ, page, publicArt) => {
   const aICArtLib = getAICArt(searchQ, page, publicArt).then((data) => {
-    console.log("full", mMArtLibFull);
     return data;
   });
 
@@ -83,19 +75,14 @@ export const getPageLib = (searchQ, page, publicArt) => {
   const idsWithData = ids.map((element) => {
     return getMMArtByID(element);
   });
-  console.log("sliced", ids);
-  console.log("sliced and info", idsWithData);
   const idsWithDataCompleted = Promise.all(idsWithData).then((data) => {
-    console.log("first data", data);
     return data;
   });
 
   return Promise.all([aICArtLib, idsWithDataCompleted]).then(
     ([aICArtdata, mMArtdata]) => {
-      console.log(aICArtdata, mMArtdata);
       const aICArtLibFormat = aICArtIDFormat(aICArtdata);
       const mMArtLibFormat = mMArtIDFormat(mMArtdata);
-      console.log("2 formatted data", [...aICArtLibFormat, ...mMArtLibFormat]);
       return [...aICArtLibFormat, ...mMArtLibFormat];
     }
   );

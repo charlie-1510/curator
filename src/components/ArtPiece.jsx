@@ -24,14 +24,12 @@ export const ArtPiece = ({
   const getArtInfo = () => {
     if (idBreakdown(art_id)[0] === "IC") {
       getAICArtByID(idBreakdown(art_id)[1]).then((data) => {
-        console.log(data);
         setArtInfo(formatArtData(data, idBreakdown(art_id)));
         setIsLoading(false);
       });
     }
     if (idBreakdown(art_id)[0] === "MM") {
       getMMArtByID(idBreakdown(art_id)[1]).then((data) => {
-        console.log(data);
         setArtInfo(formatArtData(data, idBreakdown(art_id)));
         setIsLoading(false);
       });
@@ -39,7 +37,6 @@ export const ArtPiece = ({
   };
 
   const getImageUrl = (artInfo) => {
-    console.log("artinfo", artInfo);
     if (idBreakdown(art_id)[0] === "IC") {
       return `https://www.artic.edu/iiif/2/${artInfo.more.image_id}/full/843,/0/default.jpg`;
     }
@@ -58,7 +55,6 @@ export const ArtPiece = ({
   };
 
   useEffect(() => {
-    console.log(idBreakdown(art_id));
     getArtInfo();
   }, []);
 

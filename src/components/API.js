@@ -11,10 +11,9 @@ const mmAPI = axios.create({
 export const getAICArt = (
   searchQ,
   page = 1,
-  publicArt,
-  sort /* search queries*/
+  publicArt
+  //sort
 ) => {
-  console.log("in API het AIC");
   return aicAPI
     .get("/search/", {
       params: {
@@ -25,7 +24,6 @@ export const getAICArt = (
       },
     })
     .then((response) => {
-      //console.log("hello api", response.data);
       return response.data.data;
     })
     .catch((error) => {
@@ -35,7 +33,6 @@ export const getAICArt = (
 };
 
 export const getMMArt = (searchQ, sort /* search queries*/) => {
-  console.log("in API get MM", searchQ);
   if (searchQ) {
     return mmAPI
       .get("/search", {
@@ -54,7 +51,6 @@ export const getMMArt = (searchQ, sort /* search queries*/) => {
         params: { q: searchQ /*sort*/ },
       })
       .then((response) => {
-        //console.log("hello api", response.data);
         return response.data;
       })
       .catch((error) => {
@@ -64,14 +60,12 @@ export const getMMArt = (searchQ, sort /* search queries*/) => {
   }
 };
 
-export const getMMArtByID = (id /* search queries*/) => {
-  console.log("in API get MM ID");
+export const getMMArtByID = (id) => {
   return mmAPI
     .get(`/objects/${id}`, {
       params: {},
     })
     .then((response) => {
-      //console.log("hello api", response.data);
       return response.data;
     })
     .catch((error) => {
@@ -80,14 +74,12 @@ export const getMMArtByID = (id /* search queries*/) => {
     });
 };
 
-export const getAICArtByID = (id /* search queries*/) => {
-  console.log("in API get AIC ID");
+export const getAICArtByID = (id) => {
   return aicAPI
     .get(`/${id}`, {
       params: {},
     })
     .then((response) => {
-      //console.log("hello api", response.data);
       return response.data.data;
     })
     .catch((error) => {

@@ -11,12 +11,9 @@ export const Library = ({
   removeFromCollection,
   collection,
 }) => {
-  console.log("libr", library);
-
   const handleNextPage = () => {
     setLibrary([]);
     getPageLib(searchTerm, page + 1, null).then((data) => {
-      console.log("Next", data);
       setLibrary(data);
     });
     setPage(page + 1);
@@ -25,7 +22,6 @@ export const Library = ({
     if (page > 1) {
       setLibrary([]);
       getPageLib(searchTerm, page - 1, null).then((data) => {
-        console.log("Previous", data);
         setLibrary(data);
       });
       setPage(page - 1);

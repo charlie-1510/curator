@@ -8,7 +8,6 @@ export const Search = ({ setLibrary, searchTerm, setSearchTerm }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(event.target[0].value);
     if (event.target[0].value !== "") {
       if (event.target[0].value !== searchTerm) {
         setLibrary([]);
