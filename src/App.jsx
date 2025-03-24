@@ -73,6 +73,11 @@ function App() {
   };
 
   useEffect(() => {
+    if (loadCollections() === null) {
+      saveCollections([{ id: 0, name: "My First Collection", collection: [] }]);
+      setCollections([{ id: 0, name: "My First Collection", collection: [] }]);
+      selectCollection(0);
+    }
     if (loadCollections()[0].collection) {
       setCollections(loadCollections());
       selectCollection(loadCollectionID());
